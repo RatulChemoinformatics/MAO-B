@@ -31,7 +31,7 @@ tab1,tab2,tab3,tab4,tab5,tab6,tab7 = st.tabs(['Main', 'About', 'What is MA0-B?',
 with tab1:
     st.title('Application Description')
     st.success(
-        " This module of [**MA0-B-Pred**](https://github.com/RatulChemoinformatics/MAO-B has been built to predict bioactivity and identify potent inhibitors against MA0-B using robust machine learning algorithms. The application has been built by [Ratul Bhowmik, Sunil Kumar, Dr. Bijo Mathew] "
+        " This module of [**MA0-B-Pred**](https://github.com/RatulChemoinformatics/MAO-B has been built to predict bioactivity and identify potent inhibitors against MA0-B using robust machine learning algorithms."
     )
 
 # Define a sidebar for navigation
