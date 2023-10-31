@@ -1,0 +1,9 @@
+pandas
+Pillow
+base58
+click
+numpy
+pickle-mixin
+streamlit
+streamlit-option-menu
+scikit-learn==1.2.2
