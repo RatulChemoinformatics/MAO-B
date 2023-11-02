@@ -253,7 +253,7 @@ with tab2:
   st.image(coverimage)
 with tab3:
   st.header('What is MA0-B?')
-  st.write('Poly (ADP-ribose) polymerase-1 (PARP-1) is an enzyme that catalyzes the ADP-ribosylation of a specific protein and plays a vital role in DNA repair. It has become an attractive target as inhibition of PARP-1 causes a toxic accumulation of DNA double strand breaks in cancer cells, particularly those with BRCA1/2 deficiency, which are found in breast, ovarian, prostate, and pancreatic cancers.')
+  st.write('Monoamine oxidase B (MAO-B) is an enzymatic catalyst that contributes to the metabolic processes of monoamine neurotransmitters inside the cerebral region, encompassing dopamine. The predominant localization of MAO-B is observed in both glial cells and neurons inside the central nervous system. The substance has the ability to degrade and render neurotransmitters such as dopamine, norepinephrine, and serotonin biologically inert. The enzyme monoamine oxidase B (MAO-B) exhibits a special affinity for dopamine, facilitating its breakdown. The investigation of the involvement of MAO-B in neurodegenerative illnesses, specifically PD.')
 with tab4:
   st.header('Dataset')
   st.write('''
