@@ -274,4 +274,4 @@ with tab6:
 with tab7:
   st.markdown('Mathew B, Oh JM, Abdelgawad MA, Khames A, Ghoneim MM, Kumar S, Nath LR, Sudevan ST, Parambi DG, Agoni C, Soliman ME. Conjugated dienones from differently substituted cinnamaldehyde as highly potent monoamine oxidase-B inhibitors: Synthesis, biochemistry, and computational chemistry, ***ACS Omega Journal*** (2022) DOI: https://doi.org/10.1021/acsomega.2c00397.')
 with tab8:
-  st.markdown('Ratul Bhowmik, Sunil Kumar, Dr. Bijo Mathew. [***CADD LAB, Amrita School of Pharmacy, Amrita Vishwa Vidyapeetham, Kochi***] ')
+  st.markdown('Ratul Bhowmik, Sunil Kumar, Dr. Bijo Mathew. [***CADD LAB, Department of Pharmaceutical Chemistry, Amrita School of Pharmacy, Amrita Vishwa Vidyapeetham, Kochi***] ')
