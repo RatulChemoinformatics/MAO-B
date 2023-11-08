@@ -257,13 +257,11 @@ with tab3:
 with tab4:
   st.header('Dataset')
   st.write('''
-    In our work, we retrieved a human MA0-B biological dataset from the ChEMBL database. The data was curated and resulted in a non-redundant set of 2,018 PARP-1 inhibitors, which can be divided into:
-    - 1,720 active compounds
-    - 298 inactive compounds
+    In our work, we retrieved a human MA0-B biological dataset from the ChEMBL database. The data was curated and resulted in a non-redundant set of 219 MA0-B inhibitors, which demostrated a bioactivity value (pIC50) between 8.09 to 3.64
     ''')
 with tab5:
   st.header('Model performance')
-  st.write('We selected PubChem as a molecular fingerprint and used a random forest with an oversampling approach to construct the best model. The Matthews correlation coefficients for training, cross-validation, and test sets were 1.00, 0.96, and 0.74, respectively.')
+  st.write('We selected a total of 3 different molecular signatures namely pubchem fingerprints, substructure fingerprints, and 1D 2D molecular descriptors to build the web application. The correlation coefficient, RMSE, and MAE values for the pubchem fingerprint model was found to be 0.9863, 0.212, and 0.1645. The correlation coefficient, RMSE, and MAE values for the substructure fingerprint model was found to be 0.9796, 0.2288, and 0.1683. The correlation coefficient, RMSE, and MAE values for the 1D and 2D molecular descriptor model was found to be 0.9852, 0.2452, and 0.1874')
 with tab6:
   st.header('Python libraries')
   st.markdown('''
@@ -274,4 +272,4 @@ with tab6:
     - `padelpy`
   ''')
 with tab7:
-  st.markdown('T. Lerksuthirat, S. Chitphuk, W. Stitchantrakul, D. Dejsuphong, A.A. Malik, C. Nantasenamat, PARP1PRED: A web server for screening the bioactivity of inhibitors against DNA repair enzyme PARP-1, ***EXCLI Journal*** (2023) DOI: https://doi.org/10.17179/excli2022-5602.')
+  st.markdown('Mathew B, Oh JM, Abdelgawad MA, Khames A, Ghoneim MM, Kumar S, Nath LR, Sudevan ST, Parambi DG, Agoni C, Soliman ME. Conjugated dienones from differently substituted cinnamaldehyde as highly potent monoamine oxidase-B inhibitors: Synthesis, biochemistry, and computational chemistry, ***ACS Omega Journal*** (2022) DOI: https://doi.org/10.1021/acsomega.2c00397.')
