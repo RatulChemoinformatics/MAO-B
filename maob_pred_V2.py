@@ -26,7 +26,7 @@ bioactivity_second_model = pickle.load(open('substructure.pkl', 'rb'))
 bioactivity_third_model = pickle.load(open('descriptors.pkl', 'rb'))
 
 # Define the tabs
-tab1,tab2,tab3,tab4,tab5,tab6,tab7 = st.tabs(['Main', 'About', 'What is MA0-B?', 'Dataset', 'Model performance', 'Python libraries', 'Citing us'])
+tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8 = st.tabs(['Main', 'About', 'What is MA0-B?', 'Dataset', 'Model performance', 'Python libraries', 'Citing us', 'Application Developers'])
 
 with tab1:
     st.title('Application Description')
@@ -273,3 +273,5 @@ with tab6:
   ''')
 with tab7:
   st.markdown('Mathew B, Oh JM, Abdelgawad MA, Khames A, Ghoneim MM, Kumar S, Nath LR, Sudevan ST, Parambi DG, Agoni C, Soliman ME. Conjugated dienones from differently substituted cinnamaldehyde as highly potent monoamine oxidase-B inhibitors: Synthesis, biochemistry, and computational chemistry, ***ACS Omega Journal*** (2022) DOI: https://doi.org/10.1021/acsomega.2c00397.')
+with tab8:
+  st.markdown('Ratul Bhowmik, Sunil Kumar, Dr. Bijo Mathew. [***CADD LAB, Amrita School of Pharmacy, Amrita Vishwa Vidyapeetham, Kochi***] ')
