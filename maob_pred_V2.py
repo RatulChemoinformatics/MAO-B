@@ -26,12 +26,12 @@ bioactivity_second_model = pickle.load(open('substructure.pkl', 'rb'))
 bioactivity_third_model = pickle.load(open('descriptors.pkl', 'rb'))
 
 # Define the tabs
-tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8 = st.tabs(['Main', 'About', 'What is MA0-B?', 'Dataset', 'Model performance', 'Python libraries', 'Citing us', 'Application Developers'])
+tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8 = st.tabs(['Main', 'About', 'What is MAO-B?', 'Dataset', 'Model performance', 'Python libraries', 'Citing us', 'Application Developers'])
 
 with tab1:
     st.title('Application Description')
     st.success(
-        " This module of [**MA0-B-Pred**](https://github.com/RatulChemoinformatics/MAO-B has been built to predict bioactivity and identify potent inhibitors against MA0-B using robust machine learning algorithms."
+        " This module of [**MAO-B-Pred**](https://github.com/RatulChemoinformatics/MAO-B has been built to predict bioactivity and identify potent inhibitors against MAO-B using robust machine learning algorithms."
     )
 
 # Define a sidebar for navigation
@@ -39,18 +39,19 @@ with st.sidebar:
     selected = st.selectbox(
         'Choose a prediction model',
         [
-            'MA0-B prediction model using pubchemfingerprints',
-            'MA0-B prediction model using substructurefingerprints',
-            'MA0-B prediction model using 1D and 2D molecular descriptors',
+            'MAO-B prediction model using pubchemfingerprints',
+            'MAO-B prediction model using substructurefingerprints',
+            'MAO-B prediction model using 1D and 2D molecular descriptors',
         ],
     )
 
 # MAO-B prediction model using pubchemfingerprints
-if selected == 'MA0-B prediction model using pubchemfingerprints':
+if selected == 'MAO-B prediction model using pubchemfingerprints':
     # page title
-    st.title('Predict bioactivity of molecules against MA0-B using pubchemfingerprints')
+    st.title('Predict bioactivity of molecules against MAO-B using pubchemfingerprints')
 
     # Molecular descriptor calculator
+      
     def desc_calc():
         # Performs the descriptor calculation
         bashCommand = "java -Xms2G -Xmx2G -Djava.awt.headless=true -jar ./PaDEL-Descriptor/PaDEL-Descriptor.jar -removesalt -standardizenitro -fingerprints -descriptortypes ./PaDEL-Descriptor/PubchemFingerprinter.xml -dir ./ -file descriptors_output.csv"
@@ -58,12 +59,19 @@ if selected == 'MA0-B prediction model using pubchemfingerprints':
         output, error = process.communicate()
         os.remove('molecule.smi')
 
-    # File download
+    
+      # File download
     def filedownload(df):
-        csv = df.to_csv(index=False)
-        b64 = base64.b64encode(csv.encode()).decode()  # strings <-> bytes conversions
-        href = f'<a href="data:file/csv;base64,{b64}" download="prediction.csv">Download Predictions</a>'
-        return href
+       csv = df.to_csv(index=False)  # Convert DataFrame to CSV format
+       b64 = base64.b64encode(csv.encode()).decode()  # Encode CSV string in base64
+       href = f'<a href="data:file/csv;base64,{b64}" download="prediction.csv">Download Predictions</a>'  # Create download link
+       return href
+
+# Example usage:
+# Assuming df is your DataFrame
+# download_link = filedownload(df)
+# print(download_link)
+    
 
     # Model building
     def build_model(input_data):
@@ -77,16 +85,16 @@ if selected == 'MA0-B prediction model using pubchemfingerprints':
         st.markdown(filedownload(df), unsafe_allow_html=True)
 
     # Sidebar
-    with st.sidebar.header('1. Upload your CSV data'):
-        uploaded_file = st.sidebar.file_uploader("Upload your input file", type=['txt'])
-        st.sidebar.markdown("""
-        [Example input file](https://github.com/RatulChemoinformatics/QSAR/blob/main/predict.txt)
-        """)
+    with st.sidebar.header('SMILES Input'):
+        userinput = st.sidebar.text_input(" ", 'ccccc')
+        with open('user_input.txt', 'w') as f:
+            f.write(f"{userinput} SMILES1")
 
     if st.sidebar.button('Predict'):
-        if uploaded_file is not None:
-            load_data = pd.read_table(uploaded_file, sep=' ', header=None)
-            load_data.to_csv('molecule.smi', sep='\t', header=False, index=False)
+        if userinput is not None:
+            load_data = pd.read_table('user_input.txt', sep=' ', header=None)
+            load_data.to_csv('molecule.smi', sep='\t',
+                             header=False, index=False)
 
             st.header('**Original input data**')
             st.write(load_data)
@@ -113,9 +121,9 @@ if selected == 'MA0-B prediction model using pubchemfingerprints':
             st.warning('Please upload an input file.')
 
 # MAO-B prediction model using substructurefingerprints
-elif selected == 'MA0-B prediction model using substructurefingerprints':
+elif selected == 'MAO-B prediction model using substructurefingerprints':
     # page title
-    st.title('Predict bioactivity of molecules against MA0-B using substructurefingerprints')
+    st.title('Predict bioactivity of molecules against MAO-B using substructurefingerprints')
 
     # Molecular descriptor calculator
     def desc_calc():
@@ -144,16 +152,16 @@ elif selected == 'MA0-B prediction model using substructurefingerprints':
         st.markdown(filedownload(df), unsafe_allow_html=True)
 
     # Sidebar
-    with st.sidebar.header('1. Upload your CSV data'):
-        uploaded_file = st.sidebar.file_uploader("Upload your input file", type=['txt'])
-        st.sidebar.markdown("""
-        [Example input file](https://raw.githubusercontent.com/dataprofessor/bioactivity-prediction-app/main/example_acetylcholinesterase.txt)
-        """)
+    with st.sidebar.header('SMILES Input'):
+        userinput = st.sidebar.text_input(" ", 'ccccc')
+        with open('user_input.txt', 'w') as f:
+            f.write(f"{userinput} SMILES1")
 
     if st.sidebar.button('Predict'):
-        if uploaded_file is not None:
-            load_data = pd.read_table(uploaded_file, sep=' ', header=None)
-            load_data.to_csv('molecule.smi', sep='\t', header=False, index=False)
+        if userinput is not None:
+            load_data = pd.read_table('user_input.txt', sep=' ', header=None)
+            load_data.to_csv('molecule.smi', sep='\t',
+                             header=False, index=False)
 
             st.header('**Original input data**')
             st.write(load_data)
@@ -180,10 +188,10 @@ elif selected == 'MA0-B prediction model using substructurefingerprints':
             st.warning('Please upload an input file.')
             
             
-# MA0-B prediction model using 1D and 2D molecular descriptors
-if selected == 'MA0-B prediction model using 1D and 2D molecular descriptors':
+# MAO-B prediction model using 1D and 2D molecular descriptors
+if selected == 'MAO-B prediction model using 1D and 2D molecular descriptors':
     # page title
-    st.title('Predict bioactivity of molecules against MA0-B using 1D and 2D molecular descriptors')
+    st.title('Predict bioactivity of molecules against MAO-B using 1D and 2D molecular descriptors')
 
     # Molecular descriptor calculator
     def desc_calc():
@@ -212,16 +220,16 @@ if selected == 'MA0-B prediction model using 1D and 2D molecular descriptors':
         st.markdown(filedownload(df), unsafe_allow_html=True)
 
     # Sidebar
-    with st.sidebar.header('1. Upload your CSV data'):
-        uploaded_file = st.sidebar.file_uploader("Upload your input file", type=['txt'])
-        st.sidebar.markdown("""
-        [Example input file](https://raw.githubusercontent.com/dataprofessor/bioactivity-prediction-app/main/example_acetylcholinesterase.txt)
-        """)
+    with st.sidebar.header('SMILES Input'):
+        userinput = st.sidebar.text_input(" ", 'ccccc')
+        with open('user_input.txt', 'w') as f:
+            f.write(f"{userinput} SMILES1")
 
     if st.sidebar.button('Predict'):
-        if uploaded_file is not None:
-            load_data = pd.read_table(uploaded_file, sep=' ', header=None)
-            load_data.to_csv('molecule.smi', sep='\t', header=False, index=False)
+        if userinput is not None:
+            load_data = pd.read_table('user_input.txt', sep=' ', header=None)
+            load_data.to_csv('molecule.smi', sep='\t',
+                             header=False, index=False)
 
             st.header('**Original input data**')
             st.write(load_data)
@@ -252,12 +260,12 @@ with tab2:
   coverimage = Image.open('Logo.png')
   st.image(coverimage)
 with tab3:
-  st.header('What is MA0-B?')
+  st.header('What is MAO-B?')
   st.write('Monoamine oxidase B (MAO-B) is an enzymatic catalyst that contributes to the metabolic processes of monoamine neurotransmitters inside the cerebral region, encompassing dopamine. The predominant localization of MAO-B is observed in both glial cells and neurons inside the central nervous system. The substance has the ability to degrade and render neurotransmitters such as dopamine, norepinephrine, and serotonin biologically inert. The enzyme monoamine oxidase B (MAO-B) exhibits a special affinity for dopamine, facilitating its breakdown. The investigation of the involvement of MAO-B in neurodegenerative illnesses, specifically PD.')
 with tab4:
   st.header('Dataset')
   st.write('''
-    In our work, we retrieved a human MA0-B biological dataset from the ChEMBL database. The data was curated and resulted in a non-redundant set of 219 MA0-B inhibitors, which demostrated a bioactivity value (pIC50) between 8.09 to 3.64
+    In our work, we retrieved a human MAO-B biological dataset from the ChEMBL database. The data was curated and resulted in a non-redundant set of 219 MAO-B inhibitors, which demostrated a bioactivity value (pIC50) between 8.09 to 3.64
     ''')
 with tab5:
   st.header('Model performance')
@@ -272,6 +280,6 @@ with tab6:
     - `padelpy`
   ''')
 with tab7:
-  st.markdown('Mathew B, Oh JM, Abdelgawad MA, Khames A, Ghoneim MM, Kumar S, Nath LR, Sudevan ST, Parambi DG, Agoni C, Soliman ME. Conjugated dienones from differently substituted cinnamaldehyde as highly potent monoamine oxidase-B inhibitors: Synthesis, biochemistry, and computational chemistry, ***ACS Omega Journal*** (2022) DOI: https://doi.org/10.1021/acsomega.2c00397.')
+  st.markdown('Kumar, Sunil, Ratul Bhowmik, Jong Min Oh, Mohamed A. Abdelgawad, Mohammed M. Ghoneim, Rasha Hamed Al‑Serwi, Hoon Kim, and Bijo Mathew. "Machine learning driven web-based app platform for the discovery of monoamine oxidase B inhibitors." Scientific Reports 14, no. 1 (2024): 4868. DOI: 10.1038/s41598-024-55628-y')
 with tab8:
   st.markdown('Ratul Bhowmik, Sunil Kumar, Dr. Bijo Mathew. [***CADD LAB, Department of Pharmaceutical Chemistry, Amrita School of Pharmacy, Amrita Vishwa Vidyapeetham, Kochi***] ')
