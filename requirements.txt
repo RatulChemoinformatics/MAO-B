@@ -2,7 +2,7 @@ pandas
 Pillow
 base58
 click
-numpy
+numpy==1.26.4
 pickle-mixin
 streamlit
 streamlit-option-menu
